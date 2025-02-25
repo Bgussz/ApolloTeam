@@ -1,39 +1,36 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const authContainer = document.getElementById("authContainer");
-    const authTitle = document.getElementById("authTitle");
-    const authForm = document.getElementById("authForm");
-    const toggleAuth = document.getElementById("toggleAuth");
-    const mainNav = document.getElementById("mainNav");
-    const mainContent = document.getElementById("mainContent");
-    const logoutBtn = document.getElementById("logoutBtn");
-  
-    let isSignUp = false;
-  
-    // Toggle antara login & sign-up
-    toggleAuth.addEventListener("click", function() {
-      isSignUp = !isSignUp;
-      if (isSignUp) {
-        authTitle.textContent = "Sign Up";
-        toggleAuth.innerHTML = '<a href="#">Sudah punya akun? Login</a>';
-      } else {
-        authTitle.textContent = "Login";
-        toggleAuth.innerHTML = '<a href="#">Belum punya akun? Daftar</a>';
-      }
-    });
-  
-    // Simulasi login/sign-up
-    authForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-      authContainer.style.display = "none";
-      mainNav.classList.remove("d-none");
-      mainContent.classList.remove("d-none");
-    });
-  
-    // Logout
-    logoutBtn.addEventListener("click", function() {
-      authContainer.style.display = "flex";
-      mainNav.classList.add("d-none");
-      mainContent.classList.add("d-none");
-    });
-  });
-  
+// Fungsi untuk navigasi antar halaman utama
+function showPage(page) {
+  // Sembunyikan semua halaman
+  document.getElementById("homePage").classList.add("d-none");
+  document.getElementById("blogPage").classList.add("d-none");
+  document.getElementById("contactPage").classList.add("d-none");
+  document.getElementById("postContent").classList.add("d-none");
+
+  // Tampilkan halaman yang dipilih
+  document.getElementById(page + "Page").classList.remove("d-none");
+}
+
+// Data Artikel Blog
+const blogPosts = {
+  post1: {
+      title: "Cara memakai tema Hugo",
+      body: "Hugo adalah generator situs statis yang cepat dan fleksibel. Untuk memakai tema, cukup download dari repositori dan aktifkan di config.toml."
+  },
+  post2: {
+      title: "Cara hosting dengan GitHub",
+      body: "GitHub Pages memungkinkan kita untuk hosting situs secara gratis. Cukup push file ke branch 'gh-pages' dan aktifkan melalui settings."
+  },
+  post3: {
+      title: "Teknik Telekomunikasi",
+      body: "Telekomunikasi modern menggunakan berbagai teknik seperti OFDM, MIMO, dan LoRa untuk meningkatkan kapasitas jaringan."
+  }
+};
+
+// Fungsi untuk menampilkan artikel blog
+function showPost(postId) {
+  document.getElementById("blogPage").classList.add("d-none");
+  document.getElementById("postContent").classList.remove("d-none");
+
+  document.getElementById("postTitle").innerText = blogPosts[postId].title;
+  document.getElementById("postBody").innerText = blogPosts[postId].body;
+}
